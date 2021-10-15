@@ -5,7 +5,7 @@ import glob
 import numpy as np
 
 
-filesPerList=25
+filesPerList=10
 
 SampleName = sys.argv [1]
 def checkAndMakeDir(dir):

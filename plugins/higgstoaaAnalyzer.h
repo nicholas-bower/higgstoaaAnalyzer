@@ -7,6 +7,7 @@ namespace h2AA{
         T physicsObject = *handle.product();
         return physicsObject;
     }
+    
     bool checkID(reco::GsfElectron e, int iD, double rho, float Esc) {
         float hoverECut=0.0;
         float SigmaIeIeCut=0;
@@ -101,7 +102,7 @@ namespace h2AA{
         return result;
     }
 
-    float muonIsoCut(reco::Muon m){
+    float muonIsolation(reco::Muon m){
         float  iso = (m.pfIsolationR04().sumPhotonEt+m.pfIsolationR04().sumNeutralHadronEt-0.5*m.pfIsolationR04().sumPUPt)/m.pt();
         if  (iso<0){iso=0;}
         iso = iso+ m.pfIsolationR04().sumChargedHadronPt/m.pt();

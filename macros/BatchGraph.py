@@ -6,8 +6,8 @@ import ConfigParser
 import glob
 import numpy as np
 import tdrstyle, CMS_lumi
-inFileName = sys.argv [1]
-label = sys.argv [2]
+label = sys.argv [1]
+
 
 tdrstyle.setTDRStyle()
 ROOT.gROOT.SetBatch(True)
@@ -30,7 +30,7 @@ H  = H_ref
 T = 0.08*H_ref
 B = 0.12*H_ref 
 L = 0.12*W_ref
-R = 0.04*W_ref
+R = 0.08*W_ref
 
 c = ROOT.TCanvas("c","c",50,50,W,H)
 c.SetFillColor(0)
@@ -44,7 +44,7 @@ c.SetBottomMargin( B/H )
 c.SetTickx(0)
 c.SetTicky(0)
 CMS_lumi.CMS_lumi(c, iPeriod, iPos)
-inFile = ROOT.TFile.Open(inFileName ,"READ")
+inFile = ROOT.TFile.Open(label+".root" ,"READ")
 TDir=inFile.Get("simple") 
 outDir = "//uscms_data/d3/nbower/FSU/HtoAA/Analyzer/CMSSW_10_6_26/src/higgstoaaAnalyzer/higgstoaaAnalyzer/graphs/"+label+"/"
 def checkAndMakeDir(dir):
@@ -56,20 +56,23 @@ def clearDir(dir):
         os.remove(fil)      
 checkAndMakeDir(outDir)
 clearDir(outDir)
-for h in TDir.GetListOfKeys():
-    h = h.ReadObj()
-    HistType=h.ClassName()
-    HistName=h.GetName()
-    
-    hist=TDir.Get(HistName)
-    title = hist.GetTitle()
-    hist.GetXaxis().SetTitle(title)
-    hist.Draw()
-    CMS_lumi.CMS_lumi(c, iPeriod, iPos)
-    c.cd()
-    c.Update()
-    c.RedrawAxis()
-    frame = c.GetFrame()
-    frame.Draw()
-    c.SaveAs(outDir+HistName+".png")
-    c.Clear()
+def plotAll():
+    for h in TDir.GetListOfKeys():
+        h = h.ReadObj()
+        HistType=h.ClassName()
+        HistName=h.GetName()
+        hist=TDir.Get(HistName)
+        title = hist.GetTitle()
+        hist.GetXaxis().SetTitle(title)
+        hist.LabelsDeflate()
+
+        hist.Draw()
+        CMS_lumi.CMS_lumi(c, iPeriod, iPos)
+        c.cd()
+        c.Update()
+        c.RedrawAxis()
+        frame = c.GetFrame()
+        frame.Draw()
+        c.SaveAs(outDir+HistName+".png")
+        c.Clear()
+plotAll()
