@@ -7,10 +7,17 @@ import FWCore.ParameterSet.Config as cms
 
 from FWCore.ParameterSet.VarParsing import VarParsing
 import os
-location = os.getcwd() 
 options = VarParsing ('python')
-options.setDefault('maxEvents',50)
-options.setDefault('inputFiles',"root://cmseos.fnal.gov//store/user/nbower/Events/SUSYGluGluToHToAA_AToBB_AToTauTau_M-12_FilterTauTauTrigger_TuneCP5_13TeV_madgraph_pythia8_AOD/SUSYGluGluToHToAA_AToBB_AToTauTau_M-12_FilterTauTauTrigger_TuneCP5_13TeV_madgraph_pythia8_AOD_1.root")
+options.setDefault('maxEvents',10)
+#fileVec=['file://cmseos.fnal.gov//eos/uscms/store/user/nbower/Events/SUSYGluGluToHToAA_AToBB_AToTauTau_M-12_FilterTauTauTrigger_TuneCP5_13TeV_madgraph_pythia8_MINIAOD_Skimmed/FULL_HT/SUSYGluGluToHToAA_AToBB_AToTauTau_M-12_FilterTauTauTrigger_TuneCP5_13TeV_madgraph_pythia8_MINIAOD_Skimmed_2.root']
+location = os.getcwd() 
+#infile="/uscms_data/d3/nbower/FSU/HtoAA/Analyzer/CMSSW_10_6_26/src/higgstoaaAnalyzer/higgstoaaAnalyzer/fileLists/SUSYGluGluToHToAA_AToBB_AToTauTau_M-12_FilterTauTauTrigger_TuneCP5_13TeV_madgraph_pythia8_MINIAOD/SUSYGluGluToHToAA_AToBB_AToTauTau_M-12_FilterTauTauTrigger_TuneCP5_13TeV_madgraph_pythia8_MINIAOD_0.txt"
+#f = open(infile, "r")
+#for line in f:
+#    fileVec.append("file:"+line)
+#    print ("file:"+line)
+options.setDefault('inputFiles',"root://cmseos.fnal.gov//eos/uscms/store/user/nbower/Events/2018_SUSYGluGluToHToAA_AToBB_AToTauTau_M-12_FilterTauTauTrigger_TuneCP5_13TeV_madgraph_pythia8_MINIAOD/FULL_HT/SUSYGluGluToHToAA_AToBB_AToTauTau_M-12_FilterTauTauTrigger_TuneCP5_13TeV_madgraph_pythia8_MINIAOD_2.root")
+#options.setDefault('inputFiles',fileVec)
 
 
 options.parseArguments()

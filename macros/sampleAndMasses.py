@@ -1,4 +1,4 @@
-Sample = 'QCD_MINIAOD'
+#Sample = 'QCD_MINIAOD'
 #Sample = 'DYJetsToLL_94X'
 #Sample = 'DYJetsToLL'
 #Sample = 'DYJetsToLLNLO'
@@ -10,7 +10,8 @@ Sample = 'QCD_MINIAOD'
 #Sample = 'DYJetsToQQ'
 #Sample = 'ZJetsToQQ'
 #Sample = 'WJetsToQQ'
-
+#Sample = 'DYJetsToLL_10-50'
+#Sample="DYJetsToLL2018"
 isHad = True
 isCopy=True
 version="vplots"
@@ -22,74 +23,66 @@ if Sample == 'TCP':
 #    masses=['m10','m50']
 #    prefix="root://cmseos.fnal.gov/"
 
-elif Sample == 'DYJetsToLL_94X':
-    SampleText = 'DYJetsToLL'
-    masses=['M-1to5_HT-70to100', 'M-1to5_HT-100to200', 'M-1to5_HT-200to400', 'M-1to5_HT-400to600', 'M-1to5_HT-600toInf']
-    preSearchString="/"+SampleText+"_REPLACEME_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM"
-    prefix="root://xrootd.unl.edu/"
     
 elif Sample == 'DYJetsToLL':
-    masses=['M-5to50_HT-70to100', 'M-5to50_HT-100to200', 'M-5to50_HT-200to400', 'M-5to50_HT-400to600', 'M-5to50_HT-600toInf', 'M-50_HT-70to100', 'M-50_HT-100to200', 'M-50_HT-200to400', 'M-50_HT-400to600', 'M-50_HT-600to800', 'M-50_HT-800to1200', 'M-50_HT-1200to2500', 'M-50_HT-2500toInf', 'M-1To5_HT-150to200', 'M-1To5_HT-200to400', 'M-1To5_HT-400to600', 'M-1To5_HT-600toInf']
-    preSearchString="/"+Sample+"_REPLACEME_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X*/MINIAODSIM"
+    masses=['']
+    preSearchString="/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2/MINIAODSIM"
     prefix="root://xrootd.unl.edu/"
+    prefilename="DYJetsToLL_M-50_2017_v9"
+    topFolder=prefilename
+elif Sample == 'DYJetsToLL_10-50':
+    masses=['']
+    preSearchString="/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM"
+    prefix="root://xrootd.unl.edu/"
+    prefilename="DYJetsToLL_M-10To50_2017_v9"
+    topFolder=prefilename
 
-elif Sample == 'DYJetsToLLNLO':
-    SampleText = 'DYJetsToLL'
-    masses=['M-10to50', 'M-50']
-    preSearchString="/"+SampleText+"_REPLACEME_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6*v1/MINIAODSIM"
-    prefix="root://xrootd.unl.edu/"
     
 elif Sample == 'TTJets':
     masses=["Dilept"]
-    preSearchString="/"+Sample+"_REPLACEME*/RunIISummer16MiniAODv3-PUMoriond17_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM"
+    preSearchString="/TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2/MINIAODSIM"
     prefix="root://xrootd.unl.edu/"
+    prefilename="TTJets_2017_v9_MINIAOD"
+    topFolder=prefilename
 
-elif Sample == 'ST':
-    masses=['s-channel_4f_leptonDecays','t-channel_antitop_4f_inclusiveDecays', 't-channel_top_4f_inclusiveDecays', 'tW_top_5f_inclusiveDecays','tW_antitop_5f_inclusiveDecays']
-    preSearchString="/"+Sample+"_REPLACEME_*TuneCUETP8M1*/RunIISummer16MiniAODv2-PUMoriond17_80X*/MINIAODSIM"
-    prefix="root://xrootd.unl.edu/"
 
-elif Sample == 'Diboson':
-    masses=['WZ', 'WW', 'ZZ']
-    preSearchString="/REPLACEME_TuneCUETP8M1_13TeV-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X*/MINIAODSIM"
-    prefix="root://xrootd.unl.edu/"
 
-elif Sample == 'QCD':
-    masses=['HT200to300','HT300to500','HT500to700','HT700to1000','HT1000to1500','HT1500to2000','HT2000toInf']
-    preSearchString="/"+Sample+"_REPLACEME_T*/RunIIFall17*_pmx_94X*/MINIAODSIM"
-    prefix="root://cmsxrootd.fnal.gov/"
 
-elif Sample == 'DYJetsToQQ':
-    masses = ['HT180']
-    preSearchString = "/"+Sample+"_REPLACEME_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/MINIAODSIM"
-    prefix = "root://xrootd.unl.edu/"
-
-elif Sample == 'ZJetsToQQ':
-    masses = ['HT600toInf']
-    preSearchString="/"+Sample+"_REPLACEME_13TeV-madgraph*/RunIISummer16MiniAODv2-PUMoriond17_80X*/MINIAODSIM"
-    prefix = "root://xrootd.unl.edu/"
-
-elif Sample == 'WJetsToQQ':
-    masses = ['HT-600ToInf']
-    preSearchString="/"+Sample+"_REPLACEME_TuneCUETP8M1*/RunIISummer16MiniAODv2*/MINIAODSIM"
-    prefix = "root://xrootc.unl.edu/"
-elif Sample == 'QCD_AOD':
+elif Sample == 'WJetsToLNu':
     masses = ['']
-    preSearchString="/QCD_Pt-15to7000_TuneCP5_Flat2018_13TeV_pythia8/RunIISummer19UL17RECO-106X_mc2017_realistic_v6-v2/AODSIM"
-    filename = "QCD_Pt-15to7000_TuneCP5_Flat2018_13TeV_pythia8_RunIISummer19UL17RECO-106X_mc2017_realistic_v6-v2_AODSIM"
-    prefix = "root://cmseos.fnal.gov/"
-elif Sample == 'QCD_Mu':
-    masses = ['50to80', '80to120', '120to170']
-    preSearchString="/QCD_Pt-REPLACEME_MuEnrichedPt5_TuneCP5_13TeV_pythia8/RunIISummer19UL18RECO-106X_upgrade2018_realistic_v11_L1v1-v2/AODSIM"
-    prefix = "root://cmseos.fnal.gov/"
+    preSearchString="/WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM"
+    prefilename="WJetsToLNu_2017_MINIAOD"
+    topFolder=prefilename
+    prefix = "root://xrootd.unl.edu/"
+elif Sample=="WZ":
+    masses = ['']
+    preSearchString="/WZ_TuneCP5_13TeV-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM"
+    prefilename="WZ_2017_MINIAOD"
+    topFolder=prefilename
+    prefix = "root://xrootd.unl.edu/"
+
+elif Sample=="Pileup":
+    masses = ['']
+    preSearchString="/Neutrino_E-10_gun/RunIISummer17PrePremix-PUAutumn18_102X_upgrade2018_realistic_v15-v1/GEN-SIM-DIGI-RAW"
+    prefilename="Pileup"
+    topFolder=prefilename
+    prefix = "root://xrootd.unl.edu/"
+
 elif Sample == "QCD_MINIAOD":
-    masses = ['15to30','30to50','50to80', '80to120', '120to170','170to300','300to470','470to600','600to800','800to1000','1000to1400','1400to1800','1800to2400','2400to3200','3200toInf']
-    preSearchString="/QCD_Pt_REPLACEME_TuneCP5_13TeV_pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v1/MINIAODSIM"
-    prefilename = "QCD_Pt_REPLACEME_TuneCP5_13TeV_pythia8_RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v1"
+    masses = ['50to100', '100to200', '200to300','300to500','500to700','700to1000','1000to1500','1500to2000','2000toInf']
+    preSearchString="/QCD_HTREPLACEME_TuneCP5_PSWeights_13TeV-madgraphMLM-pythia8/RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1/MINIAODSIM"
+    prefilename = "QCD_HTREPLACEME_TuneCP5_PSWeights_13TeV-RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1"
     prefix = "root://cmsxrootd.fnal.gov/"
-    topFolder = "QCD_Pt_BINNED_TuneCP5_13TeV_pythia8_RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v1"
+    topFolder = "QCD_HTBinned_TuneCP5_PSWeights_13TeV-RunIISummer19UL17MiniAODv2-106X_mc2017_realistic_v9-v1"
+elif Sample == 'DYJetsToLL2018':
+    masses=['']
+    preSearchString="/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2/MINIAODSIM"
+    prefix="root://xrootd.unl.edu/"
+    prefilename="DYJetsToLL_M-50_2018_v9"
+    topFolder=prefilename
 else:
     print "Please Specify Sample Name!"
     sys.exit()
 
     
+

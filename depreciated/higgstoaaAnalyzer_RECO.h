@@ -1,16 +1,14 @@
 using namespace std;
-#include "DataFormats/PatCandidates/interface/Electron.h"
-
-namespace h2AA{
+namespace h2AA_RECO{
     template<class T>
-    T getObject(const edm::EDGetTokenT<T> token_, const edm::Event& event){
+    T getObject_RECO(const edm::EDGetTokenT<T> token_, const edm::Event& event){
         edm::Handle<T> handle;
         event.getByToken(token_, handle);
         T physicsObject = *handle.product();
         return physicsObject;
     }
     
-    bool checkID(pat::Electron e, int iD, double rho, float Esc) {
+    bool checkID_RECO(reco::GsfElectron e, int iD, double rho, float Esc) {
         float hoverECut=0.0;
         float SigmaIeIeCut=0;
         float EinvPinvCut = 0;
@@ -104,14 +102,14 @@ namespace h2AA{
         return result;
     }
 
-    float muonIsolation(reco::Muon m){
+    float muonIsolation_RECO(reco::Muon m){
         float  iso = (m.pfIsolationR04().sumPhotonEt+m.pfIsolationR04().sumNeutralHadronEt-0.5*m.pfIsolationR04().sumPUPt)/m.pt();
         if  (iso<0){iso=0;}
         iso = iso+ m.pfIsolationR04().sumChargedHadronPt/m.pt();
         return iso;
     }
     template<class T>
-    bool sortByPt( T i,T j){return i.pt()> j.pt();}
-    bool sortGenByPt(const reco::GenParticle* i,const reco::GenParticle* j){return i->pt()> j->pt();}
+    bool sortByPt_RECO( T i,T j){return i.pt()> j.pt();}
+    bool sortGenByPt_RECO(const reco::GenParticle* i,const reco::GenParticle* j){return i->pt()> j->pt();}
 
 }

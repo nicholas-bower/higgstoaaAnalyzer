@@ -42,7 +42,6 @@ process.options = cms.untracked.PSet(
 )
 
 
-
 # Output definition
 
 

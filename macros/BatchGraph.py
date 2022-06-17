@@ -45,7 +45,6 @@ c.SetTickx(0)
 c.SetTicky(0)
 CMS_lumi.CMS_lumi(c, iPeriod, iPos)
 inFile = ROOT.TFile.Open(label+".root" ,"READ")
-TDir=inFile.Get("simple") 
 outDir = "//uscms_data/d3/nbower/FSU/HtoAA/Analyzer/CMSSW_10_6_26/src/higgstoaaAnalyzer/higgstoaaAnalyzer/graphs/"+label+"/"
 def checkAndMakeDir(dir):
     if not os.path.exists(dir):
@@ -56,7 +55,9 @@ def clearDir(dir):
         os.remove(fil)      
 checkAndMakeDir(outDir)
 clearDir(outDir)
-def plotAll():
+def plotAllSimple():
+    TDir=inFile.Get("simple") 
+
     for h in TDir.GetListOfKeys():
         h = h.ReadObj()
         HistType=h.ClassName()
@@ -65,8 +66,12 @@ def plotAll():
         title = hist.GetTitle()
         hist.GetXaxis().SetTitle(title)
         hist.LabelsDeflate()
+        hist.SetMinimum(0)
+        if(HistType=="TH2F"):
+            hist.Draw("COLZ")
+        else:
+            hist.Draw()
 
-        hist.Draw()
         CMS_lumi.CMS_lumi(c, iPeriod, iPos)
         c.cd()
         c.Update()
@@ -74,5 +79,44 @@ def plotAll():
         frame = c.GetFrame()
         frame.Draw()
         c.SaveAs(outDir+HistName+".png")
+        if("selection" in HistName or "nEvent" in HistName):
+            hist.SetMinimum( 1)
+            hist.Draw()
+            ROOT.gPad.SetLogy()
+            c.SaveAs(outDir+HistName+"Log.png")
+            ROOT.gPad.SetLogy(0)
+
         c.Clear()
-plotAll()
+        
+def plotAllScaled():
+    for h in inFile.GetListOfKeys():
+        h = h.ReadObj()
+        HistType=h.ClassName()
+        HistName=h.GetName()
+        hist=inFile.Get(HistName)
+        title = hist.GetTitle()
+        hist.GetXaxis().SetTitle(title)
+        hist.LabelsDeflate()
+        hist.SetMinimum(0)
+        if(HistType=="TH2F"):
+            hist.Draw("COLZ")
+        else:
+            hist.Draw()
+
+        CMS_lumi.CMS_lumi(c, iPeriod, iPos)
+        c.cd()
+        c.Update()
+        c.RedrawAxis()
+        frame = c.GetFrame()
+        frame.Draw()
+        c.SaveAs(outDir+HistName+".png")
+        if("selection" in HistName or "nEvent" in HistName):
+            hist.SetMinimum( 1)
+            hist.Draw()
+            ROOT.gPad.SetLogy()
+            c.SaveAs(outDir+HistName+"Log.png")
+            ROOT.gPad.SetLogy(0)
+
+        c.Clear()
+#plotAllSimple()
+plotAllScaled()

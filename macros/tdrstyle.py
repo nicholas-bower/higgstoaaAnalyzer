@@ -9,6 +9,7 @@ def fixOverlay(): gPad.RedrawAxis()
 
 def setTDRStyle():
   tdrStyle =  rt.TStyle("tdrStyle","Style for P-TDR")
+  
 
    #for the canvas:
   tdrStyle.SetCanvasBorderMode(0)
@@ -66,7 +67,8 @@ def setTDRStyle():
 
 # For the statistics box:
   tdrStyle.SetOptFile(0)
-  tdrStyle.SetOptStat(0) # To display the mean and RMS:   SetOptStat("mr")
+  #tdrStyle.SetOptStat(0) # To display the mean and RMS:   SetOptStat("mr")
+  tdrStyle.SetOptStat("eou")
   tdrStyle.SetStatColor(rt.kWhite)
   tdrStyle.SetStatFont(42)
   tdrStyle.SetStatFontSize(0.025)
